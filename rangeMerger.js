@@ -7,16 +7,13 @@ function getMergedIntervals(intervals) {
     })
     
     let mergedIntervals = [];
-    for(let i = 0; i < ordered.length; i++) {
-        let curr = ordered[i];
-        let next = ordered[i + 1];
-
-        if(next) {
-            if(checkForOverlap(curr, next)) {
-                mergedIntervals.push([curr[0], next[1]]);
-            }
+    _.reduce(ordered, (curr, next) => {
+        if(checkForOverlap(curr, next)){
+            mergedIntervals.push([curr[0], next[1]]);
         }
-    }
+
+        return next;
+    });
 
     return mergedIntervals;
 }
