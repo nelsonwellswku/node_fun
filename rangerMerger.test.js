@@ -11,6 +11,20 @@ test('an empty input set returns an empty result set', () => {
     expect(actual).toHaveLength(0);
 });
 
+test('will not merge when no intervals overlap', () => {
+    // arrange
+    var ranges = [
+        [1, 3],
+        [5, 8]
+    ];
+
+    // act
+    var actual = merger.getMergedIntervals(ranges);
+
+    // assert
+    expect(actual).toEqual([]);
+});
+
 test('will merge two overlapping ranges', () => {
     // arrange
     var ranges = [
